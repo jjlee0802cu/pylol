@@ -32,3 +32,5 @@ def load_tests(loader, standard_tests, unused_pattern):
     package_tests = loader.discover(start_dir=this_dir, pattern="*_test.py")
     standard_tests.addTests(package_tests)
     return standard_tests
+
+#hehe xd
