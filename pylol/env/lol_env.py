@@ -68,7 +68,7 @@ class LoLEnv(environment.Base):
                  human_observer=False,
                  cooldowns_enabled=False,
                  manacosts_enabled=False,
-                 minion_spawns_enabled=False,
+                 minion_spawns_enabled=True,
                  config_path="",
                  multiplier=7.5,
                  step_multiplier=1):
