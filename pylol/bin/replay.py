@@ -72,7 +72,7 @@ def main(unused_argv):
                                 map_name=replay_info["map"],
                                 cooldowns_enabled=False,
                                 manacosts_enabled=False,
-                                minion_spawns_enabled=False) as controller:
+                                minion_spawns_enabled=True) as controller:
             controller.connect()
             for _ in range(replay_info["action_count"]):
                 controller.observe()
