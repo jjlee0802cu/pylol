@@ -66,9 +66,9 @@ class LoLEnv(environment.Base):
                  agent_interface_format=None,
                  replay_dir=None,
                  human_observer=False,
-                 cooldowns_enabled=False,
+                 cooldowns_enabled=True,
                  manacosts_enabled=False,
-                 minion_spawns_enabled=True,
+                 minion_spawns_enabled=False, #here
                  config_path="",
                  multiplier=7.5,
                  step_multiplier=1):
@@ -270,6 +270,7 @@ class LoLEnv(environment.Base):
 
         reward = 0
 
+        """
         # Winning (+5) Zero-Sum
         winning_weighting = 5.0
         if self._state == environment.StepType.LAST: # Last observation for episode
@@ -308,6 +309,8 @@ class LoLEnv(environment.Base):
         reward += xp_reward
         # print("XP Reward:", xp_reward)
         
+        """
+
         # Gold Gained (+0.006) Zero-Sum
         gold_weighting = 0.006
         me_gold_diff = obs["me_unit"].current_gold - last_obs["me_unit"].current_gold
@@ -335,6 +338,7 @@ class LoLEnv(environment.Base):
         reward += hp_reward
         # print("HP Reward:", hp_reward)
 
+        """
         # Mana Changed (+0.75)
         mp_weighting = 0.75
         me_cur_mp_diff  = obs["me_unit"].current_mp / obs["me_unit"].max_mp
@@ -350,6 +354,7 @@ class LoLEnv(environment.Base):
         mp_reward = me_mp_reward + enemy_mp_reward
         reward += mp_reward
         # print("MP Reward:", mp_reward)
+        """
 
         # Killed Hero (+1, -0.6)
         kill_weighting = +1
@@ -369,7 +374,7 @@ class LoLEnv(environment.Base):
         # Lane Assignment (-0.15 * seconds out of assigned lane)
         pass # Empty for now, not primary concern
         
-        # print("Reward:", reward, end = "\n\n")
+        #print("Rewardoooooooo:", reward, end = "\n\n")
         return reward
 
     def _observe(self):
@@ -529,9 +534,9 @@ def LoLEnvSettingsPlayer(
 
 def LoLEnvSettingsGameInfo(
     manacosts_enabled=False,
-    cooldowns_enabled=False,
+    cooldowns_enabled=True,
     minion_spawns_enabled=False,
-    cheats_enabled=True,
+    cheats_enabled=False,
     is_damage_text_global=True
 ):
     return {

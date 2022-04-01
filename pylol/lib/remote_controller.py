@@ -95,7 +95,7 @@ class RemoteController(object):
         """Waits until clients can join the GameServer then waits until agents can connect."""
 
         # Wait until clients can join
-        json_txt = self.r.brpop("observation", self.timeout) # Shouldn't be longer than this, will check though
+        json_txt = self.r.brpop("observation", self.timeout + 580) # Shouldn't be longer than this, will check though
         if json_txt == None:
             print("`clients_join` == NONE")
             raise ConnectionError("Couldn't get `clients_join` message from GameServer")
@@ -116,7 +116,7 @@ class RemoteController(object):
                 raise ConnectionError("Couldn't get `clients_join` message from GameServer")
         
         # Wait until agents can connect (dependend on how long client takes to load, timing issue...)
-        json_txt = self.r.brpop("observation", 60)
+        json_txt = self.r.brpop("observation", 600)
         if json_txt == None:
             print("`game_started` == NONE")
             raise ConnectionError("Couldn't get `game_started` message from GameServer")
